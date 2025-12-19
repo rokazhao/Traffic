@@ -1,0 +1,68 @@
+h1 {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 3.5rem;
+  letter-spacing: 0.5px;
+}
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 14pt;
+}
+
+.footer {
+  font-size: 10pt;
+  padding-inline: 20px;
+}
+
+a {
+  color: inherit;
+}
+
+.sim-container {
+  padding-bottom: 0rem;
+}
+
+.graph-container {
+  padding-top: 0rem;
+}
+
+.sim-container svg {
+  max-width: 450px;
+  width: 100%;
+}
+
+.graph-container svg {
+  max-width: 600px;
+  width: 100%;
+}
+
+.card-bounding {
+  max-width: 650px;
+  width: 100%;
+}
+
+.text-bounding {
+  max-width: 900px;
+  width: 100%;
+}
+
+.chart1 {
+  color: #188754;
+  font-weight: bold;
+}
+
+.chart2 {
+  color: #3199db;
+  font-weight: bold;
+}
+
+.tooltip {
+  position: absolute;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  pointer-events: none;
+  font-size: 12px;
+}

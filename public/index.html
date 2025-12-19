@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Distracted Driving</title>
+
+  <!-- Bootstrap Framework: if you want to make HTML handling simpler -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Font: DM Serif Display + Source Sans 3 (an example set of fonts that go together) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Loading D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- icon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="text-center mb-3 mt-5">Distracted Driving</h1>
+    <h5 class="text-center mb-5">Andrew Leffingwell, Jayden D'Souza, Noah Zhao</h5>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          Distracted driving is a serious issue. In 2023 alone, 3,275 people were killed in distracted driving
+          collisions. Additionally, the rate of visible driver phone usage has increased dramatically since 2006, as
+          evident in <span class="chart1">Chart 1</span>. Although many drivers avoid phone usage for safety reasons,
+          there are many other prominent forms of distracted driving. This is especially noticeable when looking at
+          rear-end collisions, which are frequently caused by distracted drivers in high-traffic situations, as shown by
+          <span class="chart2">Chart 2</span>.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="distraction_chart" class="img-fluid" viewBox="0 0 450 450"
+              preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="crash_chart" class="img-fluid" viewBox="0 0 450 450" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          To better understand the causes of distracted driving, we will introduce a simple traffic simulation.
+          In this simulation, cars travel at a constant speed on a circular road. Without any distractions,
+          every car maintains the optimal speed and there is no traffic buildup.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="p-3">
+            <button id="restart-button1" class="btn btn-success w-100">Start</button>
+          </div>
+          <div class="card-body d-flex justify-content-center sim-container">
+            <svg id="traffic-simulation1" class="img-fluid" viewBox="0 0 450 450"
+              preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="speed-graph1" class="img-fluid" viewBox="0 0 600 150" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          However, we will now introduce an external distraction. This distraction could be anything
+          from a traffic stop to a beautiful sunset—anything that causes drivers to slow down. In
+          the simulation, this is portrayed by the sun icon, with the yellow circle representing the
+          area of effect for cars. Inside this zone, cars slow down to view the distraction. Try
+          moving the distraction around to see its effects.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="p-3">
+            <button id="restart-button4" class="btn btn-success w-100">Start</button>
+          </div>
+          <div class="card-body d-flex justify-content-center sim-container">
+            <svg id="traffic-simulation4" class="img-fluid" viewBox="0 0 450 450"
+              preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="speed-graph4" class="img-fluid" viewBox="0 0 600 150" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          In addition to external distractions, many drivers experience distractions from within their own vehicles. To
+          represent these drivers, we will introduce a distracted driver. This car, highlighted in blue, has a delayed
+          reaction to the initial start. This delay could be due to phone usage or another distraction type. Although
+          the initial delay is relatively minor, it compounds as traffic moves forward. Over time, this single delay
+          creates a never-ending traffic loop.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="p-3">
+            <button id="restart-button2" class="btn btn-success w-100">Start</button>
+          </div>
+          <div class="card-body d-flex justify-content-center sim-container">
+            <svg id="traffic-simulation2" class="img-fluid" viewBox="0 0 450 450"
+              preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="speed-graph2" class="img-fluid" viewBox="0 0 600 150" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          Some people believe they are great multitaskers, but the data indicates otherwise. To test this, we will
+          examine your own distracted driving abilities. Can you maintain the red car’s speed while distracted?
+        </p>
+        <p>
+          Operate the red car with the accelerate button. After some time, a memory game will
+          appear, forcing you to split your attention between the road and the
+          game. Although the simulation runs in “slow motion” and uses fewer cars to make the task easier, you’ll
+          likely notice that your performance in both activities declines when multitasking.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="row p-3">
+            <div class="col-6">
+              <button id="restart-button3" class="btn btn-success w-100">Start</button>
+            </div>
+            <div class="col-6">
+              <button id="accelerate-button" class="btn btn-success w-100">Accelerate (Hold)</button>
+            </div>
+          </div>
+          <div class="card-body d-flex justify-content-center sim-container">
+            <svg id="traffic-simulation3" class="img-fluid" viewBox="0 0 450 450"
+              preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="speed-graph3" class="img-fluid" viewBox="0 0 600 150" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          This final chart compares all scenarios at once, showing how each distraction slows traffic relative to the
+          baseline. If a line doesn’t appear, simply rerun that simulation—the chart uses only the most recent data
+          available.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="mx-auto card-bounding">
+        <div class="card shadow">
+          <div class="card-body d-flex justify-content-center graph-container">
+            <svg id="combined_chart" class="img-fluid" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="mx-auto text-bounding">
+        <p>
+          When you place all the simulations together, a clear story emerges. Whether it’s a scenic view, a
+          delayed reaction, or the added cognitive load of a memory game, each distraction type introduces a slowdown
+          that spreads through the entire system. What feels like a small moment of distraction to one driver becomes a
+          chain reaction for every car behind them.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="text-center footer">
+    <p>CSE 442 Data Visualization — University of Washington</p>
+    <p>Sources:
+      <a target="_blank" href="https://www.nhtsa.gov/risky-driving/distracted-driving">
+        National Highway Traffic Safety Administration
+      </a>
+      —
+      <a target="_blank"
+        href="https://injuryfacts.nsc.org/motor-vehicle/motor-vehicle-safety-issues/distracted-driving/">
+        National Safety Council
+      </a>
+      —
+      <a target="_blank" href="https://aaafoundation.org/wp-content/uploads/2017/12/2015TeenCrashCausationReport.pdf">
+        AAA Foundation for Traffic Safety
+      </a>
+    </p>
+    <p>Inspiration:
+      <a target="_blank" href="https://youtu.be/iHzzSao6ypE?si=x8NcxIS8QUZEN1uw">CGP Grey Traffic</a>
+      —
+      <a target="_blank" href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">Washington Post
+        Coronavirus Spread</a>
+      —
+      <a target="_blank" href="https://www.svgrepo.com/svg/407540/sun">Sun Clipart</a>
+    </p>
+  </div>
+</body>
+
+<script type="module" src="/visualizations/combined_chart.js"></script>
+<script type="module" src="/visualizations/traffic_simulation1.js"></script>
+<script type="module" src="/visualizations/traffic_simulation2.js"></script>
+<script type="module" src="/visualizations/traffic_simulation3.js"></script>
+<script type="module" src="/visualizations/traffic_simulation4.js"></script>
+<script type="module" src="/visualizations/distraction_chart.js"></script>
+<script type="module" src="/visualizations/crash_chart.js"></script>
+
+</html>
